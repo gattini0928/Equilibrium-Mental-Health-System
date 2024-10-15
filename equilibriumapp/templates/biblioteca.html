@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/biblioteca.css' %}">
+{% endblock %}
+{% block title %} Biblioteca {% endblock %}
+
+{% block content %}
+
+<div class="container-page">
+    <h2>Livros</h2>
+    <div class="container-livros">
+        <div class="container-nomes-descricao">
+            <p>O Alquimista:</p>
+            <p>Descrição: Um alquimista doidao</p>
+        </div>
+        <div class="container-imagens">
+            <img src="https://i.zst.com.br/thumbs/12/9/14/1458301489.jpg" alt="o alquimita">
+        </div>
+    </div>
+</div>
+{% endblock %}

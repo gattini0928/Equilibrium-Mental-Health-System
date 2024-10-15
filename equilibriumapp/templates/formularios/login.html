@@ -1,6 +1,29 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+{% block title %} Login {% endblock %}
 {% block content %}
-<h1>Login</h1>
+<div class="container-page">
+    <div class="container-form">
+        <h2>Login</h2>
+        <form action="" method="post">
+            <div class="container-form-inputs-labels">
+                <div class="form-inputs-labels">
+                    <input type="email" id="email" placeholder=" ">
+                    <label for="email">E-mail</label>
+                </div>
+                
+                <div class="form-inputs-labels">
+                    <input type="password" id="senha" placeholder=" ">
+                    <label for="senha">Password</label>
+                </div>
+                <button type="submit">Send</button> 
+                <p>Don't have an account yet? <a href="{% url 'criar_conta' %}">Create here</a></p>       
+            </div>
+        </form>
+    </div>
+</div>
+<script src="js/language.js"></script>
 {% endblock %}

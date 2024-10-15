@@ -1,0 +1,200 @@
+:root {
+    --svg-links-hover-color:#22d06a ;
+    --buttons-color:#059541;
+}
+
+body{
+    gap: 3rem;
+}
+.container-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:2rem;
+}
+
+.container-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 40rem;
+    padding: 1rem;
+    width: 50rem;
+    flex-direction: column;
+    gap: 5rem;
+}
+
+.container-form-inputs-labels {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-direction: column;
+}
+
+.form-inputs-labels{
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+label {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    background-color: rgb(37, 37, 37); /* Mesmo fundo do input */
+    padding: 0 0.5rem;
+    transition: all 0.3s ease-in-out;
+    font-size: 1.6rem;
+    color: #aaa;
+    z-index: 0;
+    border-radius: 2rem;
+}
+
+input {
+    border-radius: 1.4rem;
+    padding: 1rem;
+    background-color: rgb(37, 37, 37);
+    color: white;
+    font-size: 1.6rem;
+    font-weight: 600;
+    border: solid 0.8px rgb(58, 58, 58);
+    width: 30rem;
+}
+
+input:focus + label,
+input:not(:placeholder-shown) + label {
+    top: -1.5rem;
+    left: 1rem;
+    font-size: 1.4rem;
+    color: var(--svg-links-hover-color); /* Altera a cor do label ao focar */
+    z-index: 1;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px rgba(37, 37, 37, 0.185) inset;
+    -webkit-text-fill-color: white; /* Cor do texto quando autofill */
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+input:focus {
+    border-color: var(--svg-links-hover-color);
+}
+
+input::placeholder {
+    color: #aaa; /* Cor do placeholder */
+    opacity: 1; /* Para garantir que placeholder fique visível */
+}
+
+input:focus::placeholder {
+    color: transparent; /* Placeholder some quando foca no input */
+}
+
+
+h2 {
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.monk-icon {
+    animation: monkIconColors 5s infinite; /* Loop infinito de 3s */
+    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
+}
+
+.monk-icon:hover {
+    transition: 0.3s ease-in-out;
+    animation-play-state: paused; /* Pausa a animação no hover */
+    transform: scale(1.1); /* Aumenta o SVG no hover */
+    fill: goldenrod;
+    }
+
+
+svg {
+    width: 6rem;
+    height: 6rem;
+    margin-left: 0.5rem;
+    transition: fill 0.3s ease-in-out, transform 0.3s ease-in-out;
+     /* Adiciona espaço entre o texto e o SVG, se necessário */
+}
+
+
+a,
+svg {
+    text-decoration: none;
+    font-size: 2rem;
+    border-radius: 1.2rem;
+    font-weight: 600;
+    padding: 0.5rem;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+a:link,
+a:visited {
+    color: #ffffff;
+}
+
+a:hover,
+a:active,
+svg:hover{
+    transition: 0.3s ease-in;
+    color:var(--svg-links-hover-color);
+    fill: var(--svg-links-hover-color);
+}
+
+button {
+    margin-bottom: 1rem;
+    width: 8rem;
+    height: 3rem;
+    color: white;
+    background-color: var(--buttons-color);
+    border: none;
+    border-radius: 0.8rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+button:hover {
+    background-color:#0ab953e2 ;
+    transition: all 0.3s ease-in-out;
+
+}
+
+
+@keyframes monkIconColors {
+    0% {
+        fill: #faf35f; /* Verde claro */
+    }
+    20% {
+        fill: #f8ce4f; /* Verde médio */
+    }
+    30% {
+        fill: #fbcc40; /* Verde médio */
+    }
+    40% {
+        fill: #f79245; /* Verde médio */
+    }
+    50% {
+        fill: #f76045; /* Verde médio */
+    }
+    60% {
+        fill: #f79245; /* Verde médio */
+    }
+    70% {
+        fill: #fbcc40; /* Verde médio */
+    }
+    80% {
+        fill: #f8ce4f; /* Verde médio */
+    }
+    90% {
+        fill: #f8d15d; /* Verde médio */
+    }
+    100% {
+        fill: #faf35f; /* Verde escuro */
+    }
+}
+
+

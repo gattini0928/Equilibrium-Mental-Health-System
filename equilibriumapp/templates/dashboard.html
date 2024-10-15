@@ -1,6 +1,27 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+{% block title %} Terapeuta Dashboard {% endblock %}
 {% block content %}
-<h1>Dashboard</h1>
+<div class="container-forms">
+    <form class="form-infos" action="" method="post">
+        <div class="botoes-infos">
+            <a class="a-dashboard" href="">Pacientes</a>
+            <a class="a-dashboard" href="">Horários</a>
+            <a class="a-dashboard" href="">Biblioteca</a>
+            <a class="a-dashboard" href="">Anotações</a>
+        </div>
+    </form>
+    <form class="form-metodos" action="" method="post">
+        <div class="botoes-metodos">
+            <a class="a-dashboard" href="">Agendar Consulta</a>
+            <a class="a-dashboard" href="">Remarcar Consulta</a>
+            <a class="a-dashboard" href="">Adicionar Livros</a>
+            <a class="a-dashboard" href="">Remover Paciente</a>
+            <a class="a-dashboard" href="">Sair</a>
+        </div>
+    </form>
+</div>
 {% endblock %}

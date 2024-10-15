@@ -4,11 +4,13 @@ from django.contrib.auth import views
 
 urlpatterns = [
     path('', homepage, name='homepage'),
-    path('fazer_login/', fazer_login, name='fazer_login'),
-    path('criar_conta/', criar_conta, name='criar_conta'),
+    path('fazerlogin/', fazer_login, name='fazer_login'),
+    path('criarconta/', criar_conta, name='criar_conta'),
     path('consulta/', consulta, name='consulta'),
     path('dashboard/', dashboard, name='dashboard'),
     path('medicos/', medicos, name='medicos'),
+    path('biblioteca/', biblioteca, name='biblioteca'),
+
 
     # Configuração padrão pra mudança de senha
     path("password_change/", views.PasswordChangeView.as_view(), name="password_change"),

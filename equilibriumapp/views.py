@@ -14,7 +14,10 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 
 def consulta(request):
-    return render(request, 'consultas.html')
+    return render(request, 'consulta.html')
 
 def medicos(request):
     return render(request, 'medicos.html')
+
+def biblioteca(request):
+    return render(request, 'biblioteca.html')

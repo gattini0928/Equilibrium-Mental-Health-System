@@ -6,7 +6,11 @@
 
 html {
   font-size: 62.5%;
-  min-height: 100vh;
+  scroll-behavior: smooth;
+}
+
+html, body {
+  height: 100vh;
 }
 
 body {
@@ -16,8 +20,6 @@ body {
   line-height: 1.4;
   background-color: rgb(19, 19, 19);
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
+
+

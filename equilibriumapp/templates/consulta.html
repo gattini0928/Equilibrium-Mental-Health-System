@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/consulta.css' %}">
+{% endblock %}
+{% block title %} Consulta {% endblock %}
+{% block content %}
+<div class="container-page">
+<h2>Consulta</h2>
+        <div class="container-consulta">
+          <div class="container-form">
+            <form action="">
+              <div class="container-anotacao">
+                <p>Fazer Anotação</p>
+                <textarea placeholder="Anotação sobre o paciente"></textarea>
+                <button>Enviar</button>
+              </div>
+              <div class="recomendar-livros">
+                <div class="dropdown">
+                  <button class="dropdown-btn" type="button" onclick="toggleDropdown(event)">Livros</button>
+                  <ul class="dropdown-list">
+                      <li><a href="#">O Alquimista</a></li>
+                      <li><a href="#">O Cérebro de Buda</a></li>
+                      <li><a href="#">Pensamento Postivo</a></li>
+                      <button type="submit">Enviar</button>
+                  </ul>
+                </div>
+              </div>
+              <div class="remedios">
+                <p>Remédios</p>
+                <textarea placeholder="Remédios"></textarea>
+                <button type="submit">Enviar</button>
+              </div>
+            </form>
+          </div>
+          <script src='https://meet.jit.si/external_api.js'></script>
+          <div id="meet"></div>
+        </div>
+      </div>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const domain = "meet.jit.si";
+            const options = {
+                roomName: "ConsultaTerapeutica",  // Nome único da sala, pode ser gerado dinamicamente
+                width: 400,
+                height: 600,
+                parentNode: document.querySelector('#meet'),
+                configOverwrite: {
+                  startWithVideoMuted: true,
+                  disableDeepLinking: true
+                },
+                interfaceConfigOverwrite: {
+                  TOOLBAR_BUTTONS: [
+                    'microphone', // Botão de microfone
+                    'camera',     // Botão de câmera
+                    'settings'    // Botão de configurações
+                  ]
+                }
+            };
+            const api = new JitsiMeetExternalAPI(domain, options);
+        });
+      </script>
+      
+        <script src="{% static 'js/consulta.js' %}"></script>
+{% endblock %}
