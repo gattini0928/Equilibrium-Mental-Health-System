@@ -9,29 +9,30 @@
     <div class="container-form">
         <h2>Create Account</h2>
         <form action="" method="post">
+            {% csrf_token %}
             <div class="container-form-inputs-labels">
                 <div class="form-inputs-labels">
-                    <input type="text" id="name" placeholder=" ">
-                    <label for="name">Name</label>
+                    <input type="text" id="name" name="nome" placeholder="">
+                    <label for="name">Nome</label>
                 </div>
                 <div class="form-inputs-labels">
-                    <input type="text" id="cpf" placeholder=" ">
+                    <input type="text" id="cpf" name="cpf" placeholder="">
                     <label for="cpf">CPF</label>
                 </div>
                 <div class="form-inputs-labels">
-                    <input type="email" id="email" placeholder=" ">
+                    <input type="email" id="email" name="email" placeholder=" ">
                     <label for="email">E-mail</label>
                 </div>
                 <div class="form-inputs-labels">
-                    <input type="password" id="senha" placeholder=" ">
-                    <label for="senha">Password</label>
+                    <input type="password" id="senha" name="senha" placeholder=" ">
+                    <label for="senha">Senha</label>
                 </div>
                 <div class="checkboxs-buttons">
                     <input type="radio" id="terapeuta" name="role" class="custom-radio"  value="Terapeuta"><strong>Terapeuta</strong>
                     <input type="radio" id="paciente" name="role" class="custom-radio" value="Paciente"><strong>Paciente</strong>
                 </div>
-                <button type="submit">Send</button>      
-                <p>Already have account? <a href="{% url 'fazer_login' %}">Login here</a></p>
+                <button type="submit">Enviar</button>      
+                <p>Já possui uma conta? <a href="{% url 'fazer_login' %}">Entrar</a></p>
             </div>
         </form>
     </div>

@@ -1,0 +1,22 @@
+li{
+    list-style: none;
+}
+
+.container-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 2rem;
+    flex-direction: column;
+}
+
+h2 {
+    font-size: 2.4rem;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 2rem;
+    font-weight: 600;
+}

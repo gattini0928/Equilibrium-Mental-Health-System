@@ -1,6 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% block css %} 
+    <link rel="stylesheet" href="{% static 'css/medicos.css' %}">
+{% endblock %}
 {% block content %}
-<h1>Medicos</h1>
+<div class="container-page">
+    <h1>Medicos</h1>
+    <div class="container-lista">
+        {% for medico in medicos %}
+            <h2>Médico: {{medico.nome}}</h2>
+            <h3>Pacientes:</h3>
+            <ul>
+                {% for paciente in medico.pacientes.all %}
+                    <li>{{paciente.nome}}</li>
+                {% empty %}
+                    <li>Nenhum Paciente Encontrado</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
