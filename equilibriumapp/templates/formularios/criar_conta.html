@@ -7,24 +7,44 @@
 {% block content %}
 <div class="container-page">
     <div class="container-form">
-        <h2>Create Account</h2>
-        <form action="" method="post">
+        <div class="container-messages">
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                        {{ message }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% if errors %}
+                <ul>
+                    {% for field, field_errors in errors.items %}
+                        {% if forloop.first %}
+                            <li class="form-erro"><i>{{ field_errors.0 }}</i></li> <!-- Exibe o primeiro erro do primeiro campo -->
+                        {% endif %}
+                    {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <form action="{% url 'criar_conta' %}" method="post">
             {% csrf_token %}
             <div class="container-form-inputs-labels">
+                <h2>Create Account</h2>
                 <div class="form-inputs-labels">
-                    <input type="text" id="name" name="nome" placeholder="">
+                    <input type="text" id="name" name="nome" placeholder="" required>
                     <label for="name">Nome</label>
                 </div>
                 <div class="form-inputs-labels">
-                    <input type="text" id="cpf" name="cpf" placeholder="">
+                    <input type="text" id="cpf" name="cpf" placeholder="" required>
                     <label for="cpf">CPF</label>
                 </div>
                 <div class="form-inputs-labels">
-                    <input type="email" id="email" name="email" placeholder=" ">
+                    <input type="email" id="email" name="email" placeholder="" required>
                     <label for="email">E-mail</label>
                 </div>
                 <div class="form-inputs-labels">
-                    <input type="password" id="senha" name="senha" placeholder=" ">
+                    <input type="password" id="senha" name="senha" placeholder="" required>
                     <label for="senha">Senha</label>
                 </div>
                 <div class="checkboxs-buttons">
@@ -37,5 +57,4 @@
         </form>
     </div>
 </div>
-<script src="js/language.js"></script>
 {% endblock %}

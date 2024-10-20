@@ -2,12 +2,14 @@ from django.db import models
 from django.contrib.auth.models import User
 from datetime import time
 from django.core.exceptions import ValidationError
+from .validators.validators import *
 
 class Medico(models.Model):
-    nome = models.CharField(max_length=100, null=False, blank=False)
-    email = models.EmailField(max_length=200, null=False, blank=False)
-    usuario = models.OneToOneField(User, null=False, blank=False, on_delete=models.CASCADE)
-    cpf = models.CharField(max_length=15, null=False, blank=False, default="00000000000")
+    nome = models.CharField(max_length=100, null=False, blank=False, validators=[validar_nome_completo])
+    email = models.EmailField(max_length=200, null=False, blank=False, validators=[validar_email])
+    cpf = models.CharField(max_length=15, null=False, blank=False, default="00000000000", validators=[validar_cpf])
+    usuario = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
+
     def __str__(self):
         return self.nome
     def agendar_consulta(self,medico, horario_inicio,horario_fim, dia_semana):
@@ -64,10 +66,11 @@ class Horarios(models.Model):
 
 
 class Paciente(models.Model):
-    nome = models.CharField(max_length=100, null=False, blank=False)
+    nome = models.CharField(max_length=100, null=False, blank=False, validators=[validar_nome_completo])
     medicos = models.ManyToManyField(Medico, blank=True, related_name='pacientes')
-    email = models.EmailField(max_length=200, null=False, blank=False)
-    cpf = models.CharField(max_length=15, null=False, blank=False, default="00000000000")
+    email = models.EmailField(max_length=200, null=False, blank=False, validators=[validar_email])
+    cpf = models.CharField(max_length=15, null=False, blank=False, default="00000000000", validators=[validar_cpf])
+    usuario = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
 
     def marcar_consulta(self, dia_semana, horario_inicio, horario_fim, medico):
         medico = Medico.objects.get(pk=medico.pk)

@@ -152,3 +152,27 @@ footer strong {
         fill: #faf35f; /* Verde escuro */
     }
 }
+
+.container-messages {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.container-messages li {
+    list-style: none;
+}
+
+
+.success {
+    text-align: center;
+    background-color: transparent;
+    color: rgb(75, 235, 141);
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin: 0;
+    width: 30rem;
+}
+
