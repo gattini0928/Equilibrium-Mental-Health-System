@@ -3,25 +3,114 @@
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 {% endblock %}
+<script src="https://kit.fontawesome.com/4960f9bf07.js" crossorigin="anonymous"></script>
 {% block title %} Terapeuta Dashboard {% endblock %}
 {% block content %}
-<div class="container-forms">
-    <form class="form-infos" action="" method="post">
-        <div class="botoes-infos">
-            <a class="a-dashboard" href="">Pacientes</a>
-            <a class="a-dashboard" href="">Horários</a>
-            <a class="a-dashboard" href="">Biblioteca</a>
-            <a class="a-dashboard" href="">Anotações</a>
-        </div>
-    </form>
-    <form class="form-metodos" action="" method="post">
-        <div class="botoes-metodos">
-            <a class="a-dashboard" href="">Agendar Consulta</a>
-            <a class="a-dashboard" href="">Remarcar Consulta</a>
-            <a class="a-dashboard" href="">Adicionar Livros</a>
-            <a class="a-dashboard" href="">Remover Paciente</a>
-            <a class="a-dashboard" href="">Sair</a>
-        </div>
-    </form>
+<div class="container-messages">
+    {% if messages %}
+    <ul class="messages">
+        {% for message  in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+            {{ message }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 </div>
+<div class="container-forms">
+    <div class="infos">
+        <h2>Informações</h2>
+        <div class="dropdown">
+            <div class="titulo-icone">
+                <p>Pacientes</p>
+                <button class="dropdown-btn" type="button" onclick="toggleDropdown(event)"><svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512"><path d="M17.71,12.71a1,1,0,0,0-1.42,0L13,16V6a1,1,0,0,0-2,0V16L7.71,12.71a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l4.3,4.29A2,2,0,0,0,12,19h0a2,2,0,0,0,1.4-.59l4.3-4.29A1,1,0,0,0,17.71,12.71Z"/></svg></button>
+            </div>
+            <ul class="dropdown-list">
+                <!-- Percorrendo os todos os pacientes do medico logado -->
+                {% if medico.pacientes %}
+                    {% for paciente in medico.pacientes.all %}
+                    <li><a href="{% url 'pacientes' paciente.id %}">{{paciente.nome}}</a></li>
+                    {% endfor %}
+                {% else %}
+                    <li>Nenhum paciente cadastrado</li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="dropdown">
+            <div class="titulo-icone">
+                <p>Agenda</p>
+                <button class="dropdown-btn" type="button" onclick="toggleDropdown(event)"><svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512"><path d="M17.71,12.71a1,1,0,0,0-1.42,0L13,16V6a1,1,0,0,0-2,0V16L7.71,12.71a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l4.3,4.29A2,2,0,0,0,12,19h0a2,2,0,0,0,1.4-.59l4.3-4.29A1,1,0,0,0,17.71,12.71Z"/></svg></button>
+            </div>
+            <ul class="dropdown-list">
+                <!-- Percorrendo os horarios ocupados para ver a agenda -->
+                {% if horario_ocupados %}
+                    {% for horario in horario_ocupados %}
+                    <li>{{horario}}</li>
+                    {% endfor %}
+                {% else %}
+                    <li>Nenhum horário ocupado</li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="metodos">
+            <h2>Consultas</h2>
+            <div class="dropdown">
+                <div class="titulo-icone">
+                    <p>Agendar Consulta</p>
+                    <button class="dropdown-btn" type="button" onclick="toggleDropdown(event)"><svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512"><path d="M17.71,12.71a1,1,0,0,0-1.42,0L13,16V6a1,1,0,0,0-2,0V16L7.71,12.71a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l4.3,4.29A2,2,0,0,0,12,19h0a2,2,0,0,0,1.4-.59l4.3-4.29A1,1,0,0,0,17.71,12.71Z"/></svg></button>
+                </div>
+                <ul class="dropdown-list">
+                    <!-- Percorrendo os horarios disponiveis -->
+                    {% if horarios_disponiveis %}
+                        {% for horario in horarios_disponiveis %}
+                        <li>{{horario}} <a href="{% url 'agendar' horario.id %}">Marcar</a></li>
+                        {% endfor %}
+                    {% else %}
+                        <li>Nenhum horário disponível</li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="dropdown">
+                <div class="titulo-icone">
+                    <p>Remarcar Consulta</p>
+                    <button class="dropdown-btn" type="button" onclick="toggleDropdown(event)"><svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512"><path d="M17.71,12.71a1,1,0,0,0-1.42,0L13,16V6a1,1,0,0,0-2,0V16L7.71,12.71a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l4.3,4.29A2,2,0,0,0,12,19h0a2,2,0,0,0,1.4-.59l4.3-4.29A1,1,0,0,0,17.71,12.71Z"/></svg></button>
+                </div>
+                <ul class="dropdown-list">
+                    <!-- Percorrendo os horarios ocupados para desocupar e depois marcar -->
+                    {% if horarios_ocupados %}
+                        {% for horario in horarios_ocupados %}
+                        <li>{{horario}} <a href="{% url 'remarcar' horario.id %}">Remarcar Consulta</a></li>
+                        {% endfor %}
+                    {% else %}
+                        <li>Nenhum horário ocupado para remarcar</li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="dropdown">
+                <div class="titulo-icone">
+                    <p>Remover Paciente</p>
+                    <button class="dropdown-btn" type="button" onclick="toggleDropdown(event)"><svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512"><path d="M17.71,12.71a1,1,0,0,0-1.42,0L13,16V6a1,1,0,0,0-2,0V16L7.71,12.71a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l4.3,4.29A2,2,0,0,0,12,19h0a2,2,0,0,0,1.4-.59l4.3-4.29A1,1,0,0,0,17.71,12.71Z"/></svg></button>
+                </div>
+                <ul class="dropdown-list">
+                    <!-- Percorrendo os pacientes -->
+                    {% if pacientes %}
+                        {% for paciente in pacientes %}
+                        <li>{{paciente.nome}} 
+                            <form method="POST" action="{% url 'remover_paciente' paciente.id %}">
+                                {% csrf_token %}
+                                <button type="submit">Remover</button>
+                            </form>
+                        </li>
+                        {% endfor %}
+                    {% else %}
+                        <li>Nenhum paciente a remover</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/dashboard.js' %}"></script>
 {% endblock %}
+
+

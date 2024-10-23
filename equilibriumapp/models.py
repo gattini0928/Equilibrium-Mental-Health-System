@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from datetime import time
 from django.core.exceptions import ValidationError
 from .validators.validators import *
+from django.utils import timezone as tz
 
 class Medico(models.Model):
     nome = models.CharField(max_length=100, null=False, blank=False, validators=[validar_nome_completo])
@@ -25,7 +26,7 @@ class Medico(models.Model):
         except Horarios.DoesNotExist:
             raise ValidationError('Este horário não existe')
 
-    def desmarcar_consulta(self, medico, dia_semana, horario_inicio, horario_fim):
+    def remarcar_consulta(self, medico, dia_semana, horario_inicio, horario_fim):
         try:
             horario = Horarios.objects.get(dia_semana=dia_semana, 
                                            medico=medico, 
@@ -35,6 +36,21 @@ class Medico(models.Model):
             horario.save()
         except Horarios.DoesNotExist:
             raise ValidationError('Este horário não existe')
+        
+    def remover_paciente(self, paciente):
+        # Primeiro, remove a relação do ManyToMany entre médico e paciente
+        if paciente in self.pacientes.all():
+            self.pacientes.remove(paciente)
+
+        # Se o paciente não estiver associado a nenhum outro médico, exclui ele completamente
+        if not paciente.medicos.exists():
+            paciente.delete()
+
+        else:
+            raise ValidationError(f'Paciente não encontrado ou já removido')
+
+    def adicionar_livros(self,livros):
+        pass
 class Horarios(models.Model):
     medico = models.ForeignKey(Medico, on_delete=models.CASCADE, related_name='horarios')
     dia_semana = models.CharField(max_length=15, choices=[
@@ -91,3 +107,9 @@ class Paciente(models.Model):
     def __str__(self):
         return self.nome
     
+class Anotacoes(models.Model):
+    medicos = models.ForeignKey(Medico, null=True, blank=True, on_delete=models.CASCADE, default='0', related_name='anotacoes')
+    texto = models.TextField(blank=True)
+    data = models.DateTimeField(default=tz.now)
+    def __str__(self):
+        return f'Data {self.data}: Anotação: {self.anotacoes[:30]} ...' if self.texto else 'Sem Conteúdo'

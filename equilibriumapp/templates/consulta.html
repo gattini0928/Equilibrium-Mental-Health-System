@@ -9,7 +9,8 @@
 <h2>Consulta</h2>
         <div class="container-consulta">
           <div class="container-form">
-            <form action="">
+            <form action="{% url 'consulta' %}" method="post">
+              {% csrf_token %}
               <div class="container-anotacao">
                 <p>Fazer Anotação</p>
                 <textarea placeholder="Anotação sobre o paciente"></textarea>

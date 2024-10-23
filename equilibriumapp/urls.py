@@ -11,7 +11,14 @@ urlpatterns = [
     path('dashboard/', dashboard, name='dashboard'),
     path('medicos/', medicos, name='medicos'),
     path('biblioteca/', biblioteca, name='biblioteca'),
+    
+    # Medicos
+    path('agendar/<int:horario_id>/', agendar_consulta, name='agendar'),
+    path('remover_paciente/<int:paciente_id>/', remover_paciente, name='remover_paciente'),
+    path('remarcar/<int:horario_id>/', remarcar_consulta, name='remarcar'),
 
+    # Pacientes
+    path('pacientes/<int:paciente_id>/', pacientes, name='pacientes'),
 
     # Configuração padrão pra mudança de senha
     path("password_change/", views.PasswordChangeView.as_view(), name="password_change"),

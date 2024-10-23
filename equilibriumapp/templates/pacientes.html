@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Pacientes {% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/pacientes.css' %}">
+{% endblock %}
+{% block content %}
+    {% if paciente %}
+        <p>Nome: {{ paciente.nome }}</p>
+        <p>Email: {{ paciente.email }}</p>
+        <!-- Aqui você pode adicionar mais informações do paciente -->
+    {% else %}
+        <p>Selecione um paciente para ver os detalhes.</p>
+    {% endif %}
+{% endblock %}
+
